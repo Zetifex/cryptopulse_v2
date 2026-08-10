@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_prefix="CRYPTOPULSE_")
 
-    ticker: str = "BTC_USD"
+    ticker: str = "BTC-USD"
     start_date: str = "2019-01-01"
     end_date: str | None = None  # None -> fetch through today
 

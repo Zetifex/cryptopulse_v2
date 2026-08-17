@@ -58,5 +58,5 @@ def engineer_features(
     out[TARGET_COLUMN] = (next_close > out["Close"]).astype("int64")
     out.loc[next_close.isna(), TARGET_COLUMN] = pd.NA
 
-    out = out.dropna()
-    return out.astype({TARGET_COLUMN: int})
+    out = out.dropna(subset=FEATURE_COLUMNS + [TARGET_COLUMN])
+    return out.loc[:, FEATURE_COLUMNS + [TARGET_COLUMN]].astype({TARGET_COLUMN: int})

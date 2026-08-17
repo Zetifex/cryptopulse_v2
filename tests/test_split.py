@@ -97,3 +97,17 @@ def test_scaler_is_returned_for_reuse_at_inference():
 
     assert hasattr(result.scaler, "mean_")
     assert len(result.scaler.mean_) == len(FEATURE_COLUMNS)
+
+
+def test_split_partitions_are_chronological():
+    df = _make_feature_df(100)
+    train, val, test = chronological_split(df)
+
+    assert train.index.max() < val.index.min()
+    assert val.index.max() < test.index.min()
+
+
+def test_split_rejects_empty_partition():
+    df = _make_feature_df(5)
+    with pytest.raises(ValueError, match="empty partition"):
+        chronological_split(df, train_frac=0.95, val_frac=0.04)

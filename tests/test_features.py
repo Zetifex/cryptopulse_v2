@@ -11,7 +11,7 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from cryptopulse.data.features import engineer_features
+from cryptopulse.data.features import FEATURE_COLUMNS, engineer_features
 
 
 def _make_price_df(closes: list[float]) -> pd.DataFrame:
@@ -50,7 +50,7 @@ def test_no_leakage_future_prices_do_not_affect_past_features():
     features_b = engineer_features(df_b, short_window=5, long_window=10)
 
     shared_dates = features_a.index[features_a.index < df_a.index[cutoff]]
-    feature_cols = ["short_ma", "long_ma", "daily_return", "volatility"]
+    feature_cols = FEATURE_COLUMNS
 
     pd.testing.assert_frame_equal(
         features_a.loc[shared_dates, feature_cols],

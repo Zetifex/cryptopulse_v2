@@ -11,6 +11,7 @@ dependencies = [
     "yfinance>=0.2.40,<0.3.0",
     "pydantic>=2.6,<3.0",
     "pydantic-settings>=2.2,<3.0",
+    "scikit-learn>=1.4,<2.0",
 ]
 
 [dependency-groups]
@@ -55,4 +56,9 @@ files = ["src"]
 # calls into it. ignore_missing_imports is scoped to this one module,
 # not set globally -- we still want mypy strict everywhere we control.
 module = "yfinance.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# scikit-learn ships no py.typed marker either. Same scoping rationale.
+module = "sklearn.*"
 ignore_missing_imports = true

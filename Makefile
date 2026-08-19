@@ -14,7 +14,7 @@ typecheck:  ## Static type-check src/
 	uv run mypy
 
 test:  ## Run the test suite
-	uv run pytest -v
+	uv run python -m pytest -v
 
 check: lint typecheck test  ## Everything CI will run
 

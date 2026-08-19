@@ -11,8 +11,11 @@ from __future__ import annotations
 import pandas as pd
 
 TARGET_COLUMN = "target_up"
-FEATURE_COLUMNS = ["short_ma", "long_ma", "daily_return", "volatility"]
-
+# Columns fed to the model. Deliberately excludes short_ma/long_ma: those
+# are absolute price levels, which drift far outside the training
+# distribution as the market trends. Their *ratio* carries the same
+# crossover signal while remaining scale-invariant.
+FEATURE_COLUMNS = ["ma_ratio", "price_to_long_ma", "daily_return", "volatility"]
 
 def engineer_features(
     df: pd.DataFrame,
@@ -42,6 +45,8 @@ def engineer_features(
     out = df.copy()
     out["short_ma"] = out["Close"].rolling(window=short_window).mean()
     out["long_ma"] = out["Close"].rolling(window=long_window).mean()
+    out["ma_ratio"] = out["short_ma"] / out["long_ma"] - 1.0
+    out["price_to_long_ma"] = out["Close"] / out["long_ma"] - 1.0
     out["daily_return"] = out["Close"].pct_change()
     out["volatility"] = out["daily_return"].rolling(window=short_window).std()
 

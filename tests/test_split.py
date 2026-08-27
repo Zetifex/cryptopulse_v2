@@ -98,6 +98,7 @@ def test_scaler_is_returned_for_reuse_at_inference():
     assert hasattr(result.scaler, "mean_")
     assert len(result.scaler.mean_) == len(FEATURE_COLUMNS)
 
+
 def test_split_partitions_are_chronological():
     df = _make_feature_df(100)
     train, val, test = chronological_split(df)

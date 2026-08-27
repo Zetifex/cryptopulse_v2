@@ -50,7 +50,6 @@ def test_no_leakage_future_prices_do_not_affect_past_features():
     features_b = engineer_features(df_b, short_window=5, long_window=10)
 
     shared_dates = features_a.index[features_a.index < df_a.index[cutoff]]
-    
 
     pd.testing.assert_frame_equal(
         features_a.loc[shared_dates, FEATURE_COLUMNS],

@@ -31,5 +31,14 @@ class Settings(BaseSettings):
 
     random_seed: int = 42
 
+    hidden_size: int = 32
+    num_layers: int = 1
+    dropout: float = 0.2
+    learning_rate: float = 1e-3
+    batch_size: int = 32
+    max_epochs: int = 100
+    patience: int = 10
+    grad_clip_norm: float = 1.0
+
 
 settings = Settings()

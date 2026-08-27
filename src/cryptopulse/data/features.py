@@ -17,6 +17,7 @@ TARGET_COLUMN = "target_up"
 # crossover signal while remaining scale-invariant.
 FEATURE_COLUMNS = ["ma_ratio", "price_to_long_ma", "daily_return", "volatility"]
 
+
 def engineer_features(
     df: pd.DataFrame,
     short_window: int = 10,

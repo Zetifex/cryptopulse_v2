@@ -20,3 +20,6 @@ check: lint typecheck test  ## Everything CI will run
 
 pipeline:  ## Fetch data, engineer features, write to SQLite (needs real internet access)
 	uv run python -m cryptopulse.pipeline
+
+train:  ## Train the model and write a checkpoint
+	uv run python -m cryptopulse.training.train

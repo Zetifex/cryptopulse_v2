@@ -31,6 +31,8 @@ class Settings(BaseSettings):
 
     random_seed: int = 42
 
+    checkpoint_path: str = "checkpoints/model.pt"
+
     hidden_size: int = 32
     num_layers: int = 1
     dropout: float = 0.2
